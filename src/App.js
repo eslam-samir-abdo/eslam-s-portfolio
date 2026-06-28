@@ -1,5 +1,5 @@
 // src/App.js
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { HashRouter , Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Cursor from './components/Cursor';
 import PageLoader from './components/PageLoader';
@@ -20,7 +20,7 @@ export function setIntroDone() { introDone = true; }
 export default function App() {
   return (
     <AdminProvider>
-      <BrowserRouter>
+      <HashRouter>
         <Cursor />
         <PageLoader />
         <Navbar />
@@ -31,7 +31,7 @@ export default function App() {
           <Route path="/about"    element={<About />}    />
           <Route path="/contact"  element={<Contact />}  />
         </Routes>
-      </BrowserRouter>
+      </HashRouter>
     </AdminProvider>
   );
 }
