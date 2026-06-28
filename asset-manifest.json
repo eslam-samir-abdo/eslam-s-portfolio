@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/eslam-s-portfolio/static/css/main.0fb8aabe.css",
-    "main.js": "/eslam-s-portfolio/static/js/main.40a3e3a4.js",
+    "main.js": "/eslam-s-portfolio/static/js/main.33dddde3.js",
     "index.html": "/eslam-s-portfolio/index.html",
     "main.0fb8aabe.css.map": "/eslam-s-portfolio/static/css/main.0fb8aabe.css.map",
-    "main.40a3e3a4.js.map": "/eslam-s-portfolio/static/js/main.40a3e3a4.js.map"
+    "main.33dddde3.js.map": "/eslam-s-portfolio/static/js/main.33dddde3.js.map"
   },
   "entrypoints": [
     "static/css/main.0fb8aabe.css",
-    "static/js/main.40a3e3a4.js"
+    "static/js/main.33dddde3.js"
   ]
 }
