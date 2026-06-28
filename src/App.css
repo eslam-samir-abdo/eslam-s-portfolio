@@ -1,38 +1,206 @@
-.App {
-  text-align: center;
+/* src/App.css */
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap');
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --black: #000; --white: #fff; --gray: #888;
+  --dim: #333;   --line: #1c1c1c; --gold: #f5c542;
+}
+html { scroll-behavior: smooth; }
+body {
+  background: var(--black); color: var(--white);
+  font-family: 'DM Sans', sans-serif;
+  overflow-x: hidden; cursor: none;
+}
+a { color: inherit; text-decoration: none; }
+
+/* ── CURSOR ── */
+#cur {
+  width: 10px; height: 10px; background: #fff; border-radius: 50%;
+  position: fixed; pointer-events: none; z-index: 9999;
+  transform: translate(-50%,-50%);
+  transition: width .2s, height .2s, background .2s;
+}
+#cur.xl {
+  width: 44px; height: 44px;
+  background: transparent; border: 1px solid rgba(255,255,255,.4);
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  padding: 1.2rem 5vw;
+  display: flex; justify-content: space-between; align-items: center;
+  z-index: 100; border-bottom: 1px solid var(--line);
+  background: rgba(0,0,0,.92); backdrop-filter: blur(12px);
+}
+.nav-logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.4rem; letter-spacing: .1em; color: #fff;
+}
+.nav-links { display: flex; gap: 2.2rem; list-style: none; }
+.nav-links a {
+  font-family: 'Space Mono', monospace;
+  font-size: .62rem; letter-spacing: .18em; text-transform: uppercase;
+  color: #888; transition: color .2s;
+}
+.nav-links a:hover, .nav-links a.active { color: #fff; }
+
+/* ── PAGE HERO (shared) ── */
+.page-hero {
+  padding: 9rem 5vw 4.5rem;
+  border-bottom: 1px solid var(--line);
+  position: relative; overflow: hidden;
+}
+.page-ghost {
+  position: absolute; bottom: -1rem; right: 3vw;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(6rem,17vw,15rem);
+  color: transparent; -webkit-text-stroke: 1px #111;
+  letter-spacing: -.04em; pointer-events: none;
+  user-select: none; line-height: 1;
+}
+.back-link {
+  font-family: 'Space Mono', monospace;
+  font-size: .6rem; letter-spacing: .2em; text-transform: uppercase;
+  color: #333; display: inline-flex; align-items: center;
+  gap: .5rem; margin-bottom: 1.8rem; transition: color .2s;
+}
+.back-link:hover { color: #fff; }
+.page-label {
+  font-family: 'Space Mono', monospace;
+  font-size: .6rem; letter-spacing: .3em; text-transform: uppercase;
+  color: #333; margin-bottom: .7rem;
+}
+.page-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(3.5rem,9vw,8rem); line-height: .9; letter-spacing: -.02em;
+}
+.page-title em { color: #f5c542; font-style: normal; }
+.page-sub {
+  font-family: 'Space Mono', monospace;
+  font-size: .68rem; color: #888; margin-top: 1.4rem; letter-spacing: .06em;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* ── SHARED ── */
+.tag {
+  font-family: 'Space Mono', monospace;
+  font-size: .52rem; letter-spacing: .1em; text-transform: uppercase;
+  padding: .18rem .5rem; border: 1px solid #333; color: #888;
+}
+footer {
+  border-top: 1px solid var(--line); padding: 1.8rem 5vw;
+  display: flex; justify-content: space-between; align-items: center;
+}
+footer p { font-family: 'Space Mono', monospace; font-size: .58rem; color: #333; letter-spacing: .1em; }
+
+/* ── MODAL (shared) ── */
+.modal-overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,.9);
+  z-index: 500; display: flex; align-items: center; justify-content: center;
+  backdrop-filter: blur(8px);
+}
+.modal-box {
+  background: #0d0d0d; border: 1px solid #2a2a2a;
+  padding: 2.5rem; width: min(560px, 92vw);
+  max-height: 90vh; overflow-y: auto;
+}
+.modal-box h3 {
+  font-family: 'Bebas Neue', sans-serif; font-size: 2.2rem;
+  letter-spacing: .05em; margin-bottom: 1.8rem; color: #fff;
+}
+.modal-box label {
+  display: block; font-family: 'Space Mono', monospace;
+  font-size: .56rem; letter-spacing: .2em; text-transform: uppercase;
+  color: #888; margin-bottom: .4rem; margin-top: 1rem;
+}
+.modal-box input, .modal-box textarea, .modal-box select {
+  width: 100%; background: #000; border: 1px solid #2a2a2a;
+  color: #fff; padding: .7rem .9rem;
+  font-family: 'DM Sans', sans-serif; font-size: .88rem;
+  outline: none; transition: border-color .2s; appearance: none;
+}
+.modal-box input:focus, .modal-box textarea:focus,
+.modal-box select:focus { border-color: #555; }
+.modal-box input.err { border-color: #e04; }
+.modal-box textarea { height: 75px; resize: vertical; }
+.modal-box select option { background: #111; }
+.modal-hint {
+  font-family: 'Space Mono', monospace; font-size: .55rem;
+  color: #333; margin-top: .35rem; letter-spacing: .05em;
+}
+.modal-row { display: grid; grid-template-columns: 1fr 1fr; gap: .8rem; }
+.modal-actions { display: flex; gap: .8rem; margin-top: 1.8rem; }
+.btn-save {
+  font-family: 'Space Mono', monospace; font-size: .65rem;
+  letter-spacing: .15em; text-transform: uppercase;
+  background: #fff; color: #000; border: none;
+  padding: .75rem 1.6rem; cursor: pointer; transition: background .2s; flex: 1;
+}
+.btn-save:hover { background: #f5c542; }
+.btn-cancel {
+  font-family: 'Space Mono', monospace; font-size: .65rem;
+  letter-spacing: .15em; text-transform: uppercase;
+  background: transparent; color: #888; border: 1px solid #333;
+  padding: .75rem 1.4rem; cursor: pointer; transition: border-color .2s, color .2s;
+}
+.btn-cancel:hover { border-color: #555; color: #fff; }
+
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .page-ghost { display: none; }
+  .modal-row { grid-template-columns: 1fr; }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+/* Extra mobile fixes */
+@media (max-width: 768px) {
+  .modal-box { padding: 1.5rem; }
 }
 
-.App-link {
-  color: #61dafb;
+/* ── PAGE TRANSITION LOADER ── */
+.page-loader {
+  position: fixed; inset: 0; z-index: 800;
+  background: var(--black);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; visibility: hidden; pointer-events: none;
+  transition: opacity .25s ease, visibility .25s ease;
+}
+.page-loader.active {
+  opacity: 1; visibility: visible; pointer-events: all;
+  animation: loaderFade .65s ease forwards;
+}
+@keyframes loaderFade {
+  0%   { opacity: 0; }
+  12%  { opacity: 1; }
+  78%  { opacity: 1; }
+  100% { opacity: 0; }
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.page-loader-mark {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2.6rem;
+  letter-spacing: .04em;
+  color: var(--white);
+  opacity: 0;
+  animation: markPulse .65s ease forwards;
+}
+.page-loader-mark span { color: var(--gold); }
+@keyframes markPulse {
+  0%   { opacity: 0; transform: scale(.9); }
+  20%  { opacity: 1; transform: scale(1); }
+  80%  { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: scale(.96); }
+}
+
+.page-loader-bar {
+  position: absolute; top: 0; left: 0; height: 2.5px;
+  background: var(--gold);
+  width: 0%;
+}
+.page-loader.active .page-loader-bar {
+  animation: barFill .6s cubic-bezier(.4,0,.2,1) forwards;
+}
+@keyframes barFill {
+  0%   { width: 0%; }
+  100% { width: 100%; }
 }

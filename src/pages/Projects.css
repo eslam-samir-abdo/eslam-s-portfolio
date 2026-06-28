@@ -1,0 +1,146 @@
+/* src/pages/Projects.css */
+.proj-main { padding: 4rem 5vw 8rem; }
+
+/* CATEGORY GROUPS */
+.category-group { margin-bottom: 3.5rem; }
+.category-group:last-child { margin-bottom: 0; }
+.category-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  letter-spacing: .02em; color: #f5c542;
+  margin-bottom: .5rem;
+  display: flex; align-items: center; gap: 1rem;
+}
+.category-title::after {
+  content: ''; flex: 1; height: 1px; background: #1c1c1c;
+}
+.toolbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2.5rem; flex-wrap: wrap; gap: 1rem; }
+.proj-total { font-family: 'Space Mono', monospace; font-size: .6rem; letter-spacing: .2em; text-transform: uppercase; color: #333; }
+.proj-total span { color: #fff; }
+.btn-add { font-family: 'Space Mono', monospace; font-size: .65rem; letter-spacing: .15em; text-transform: uppercase; color: #000; background: #fff; border: none; padding: .65rem 1.5rem; cursor: pointer; transition: background .2s; }
+.btn-add:hover { background: #f5c542; }
+
+.projects-list { display: flex; flex-direction: column; }
+.project-item {
+  border-top: 1px solid #1c1c1c; padding: 1.8rem 0;
+  display: grid; grid-template-columns: 52px 1fr auto;
+  align-items: center; gap: 1.5rem; transition: padding-left .3s;
+}
+.project-item:hover { padding-left: .8rem; }
+.project-item:last-child { border-bottom: 1px solid #1c1c1c; }
+.proj-num { font-family: 'Space Mono', monospace; font-size: .56rem; color: #333; letter-spacing: .1em; flex-shrink: 0; line-height: 1.7; }
+.proj-num span { color: #252525; font-size: .5rem; display: block; }
+.proj-body { display: flex; flex-direction: column; gap: .3rem; }
+.proj-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(1.3rem, 2.5vw, 1.9rem); letter-spacing: .02em; color: #fff; }
+.proj-desc { font-family: 'Space Mono', monospace; font-size: .64rem; color: #888; margin-bottom: .4rem; }
+.proj-tags { display: flex; gap: .35rem; flex-wrap: wrap; }
+
+/* ACTIONS — always visible, wraps on small screens */
+.proj-actions {
+  display: flex; gap: .5rem; align-items: center;
+  flex-wrap: wrap; justify-content: flex-end;
+}
+.btn-gh {
+  font-family: 'Space Mono', monospace; font-size: .54rem;
+  letter-spacing: .1em; text-transform: uppercase;
+  color: #888; border: 1px solid #333;
+  padding: .28rem .65rem; white-space: nowrap;
+  transition: color .2s, border-color .2s;
+}
+.btn-gh:hover { color: #fff; border-color: #fff; }
+.btn-edit {
+  font-family: 'Space Mono', monospace; font-size: .54rem;
+  letter-spacing: .1em; text-transform: uppercase;
+  color: #888; background: transparent; border: 1px solid #333;
+  padding: .28rem .65rem; white-space: nowrap; cursor: pointer;
+  transition: color .2s, border-color .2s;
+}
+.btn-edit:hover { color: #fff; border-color: #fff; }
+.btn-demo {
+  font-family: 'Space Mono', monospace; font-size: .54rem;
+  letter-spacing: .1em; text-transform: uppercase;
+  color: #000; background: #f5c542; border: 1px solid #f5c542;
+  padding: .28rem .65rem; white-space: nowrap; transition: opacity .2s;
+}
+.btn-demo:hover { opacity: .8; }
+.btn-del {
+  background: transparent; border: none; color: #333; cursor: pointer;
+  font-family: 'Space Mono', monospace; font-size: .65rem;
+  padding: .3rem .4rem; transition: color .2s; flex-shrink: 0;
+}
+.btn-del:hover { color: #e04; }
+
+.empty-state { padding: 6rem 0; text-align: center; }
+.empty-state p { font-family: 'Space Mono', monospace; font-size: .7rem; color: #333; letter-spacing: .15em; }
+.opt-hint { color: #333; font-size: .5rem; letter-spacing: .05em; text-transform: none; }
+
+/* ── ADMIN LOCK MODAL ── */
+.lock-icon { text-align: center; font-size: 2rem; margin-bottom: .5rem; }
+.admin-badge {
+  display: inline-flex; align-items: center; gap: .5rem;
+  font-family: 'Space Mono', monospace; font-size: .56rem;
+  letter-spacing: .15em; text-transform: uppercase;
+  color: #f5c542; border: 1px solid #f5c542;
+  padding: .35rem .8rem; margin-left: .8rem;
+}
+.admin-badge .dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: #f5c542; animation: pulse 1.5s ease infinite;
+}
+@keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: .3; } }
+.btn-logout {
+  font-family: 'Space Mono', monospace; font-size: .56rem;
+  letter-spacing: .1em; text-transform: uppercase;
+  color: #888; background: transparent; border: 1px solid #333;
+  padding: .35rem .8rem; cursor: pointer; margin-left: .5rem;
+  transition: color .2s, border-color .2s;
+}
+.btn-logout:hover { color: #fff; border-color: #fff; }
+
+/* mobile — keep all action buttons visible, just stack tighter */
+@media (max-width: 768px) {
+  .project-item {
+    grid-template-columns: 1fr;
+    gap: .8rem;
+  }
+  .proj-num { display: none; }
+  .proj-actions { justify-content: flex-start; }
+}
+
+/* ── DELETE CONFIRM MODAL ── */
+.confirm-box {
+  width: min(420px, 90vw);
+  text-align: center;
+}
+.confirm-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+.confirm-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.8rem;
+  letter-spacing: .03em;
+  color: #fff;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+.confirm-text {
+  font-family: 'Space Mono', monospace;
+  font-size: .72rem;
+  color: #888;
+  line-height: 1.7;
+  margin-bottom: .5rem;
+}
+.confirm-text strong {
+  color: #f5c542;
+  font-weight: 700;
+}
+.btn-confirm-delete {
+  font-family: 'Space Mono', monospace;
+  font-size: .65rem; letter-spacing: .15em; text-transform: uppercase;
+  background: #e04444; color: #fff;
+  border: none; padding: .75rem 1.6rem;
+  cursor: pointer; transition: background .2s;
+  flex: 1;
+}
+.btn-confirm-delete:hover { background: #ff5555; }
